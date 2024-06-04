@@ -14,4 +14,9 @@ app.use("/admin", adminRouter);
 // app.use("/user", userRouter);
 app.get("/", (req, res) => res.json({ msg: "Hello From The Express Server" }));
 
+mongose.connect(
+  "mongodb+srv://nbanerjee02asn:8Qt1zuOKS97nXqhV@cluster0.vg0jben.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  { useNewUrlParser: true, useUnifiedTopology: true, dbName: "courses" }
+);
+
 app.listen(PORT, () => console.log(`App Started On Port ${PORT}`));
