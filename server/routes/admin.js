@@ -11,15 +11,18 @@ router.get("/me", authenticateJwt, async (req, res) => {
   if (!admin) {
     res.status(403).json({ msg: "Admin Doesn't Exists" });
   }
-  res.json({ username: admin.username });
+  res.json({
+    username: admin.username,
+    avatarUrl: admin.avatar_url,
+  });
 });
 
 // Admin POST->Signup => Create New Admin Account & Return Token
 router.post("/signup", async (req, res) => {
-  const { username, password } = req.headers;
+  const { username, password, avatar_url } = req.headers;
   const admin = await Admin.findOne({ username });
   if (admin) return res.status(403).json({ msg: "Admin Already Exists" });
-  const newAdmin = new Admin({ username, password });
+  const newAdmin = new Admin({ username, password, avatar_url });
   newAdmin
     .save()
     .then(() => {
